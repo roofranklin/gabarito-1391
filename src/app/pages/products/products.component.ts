@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent {
+  products = [
+    { id:1, name: 'Notebook Gamer', status: 'Disponível' },
+    { id:2, name: 'Smartphone', status: 'Pré compra' },
+    { id:3, name: 'Tablet', status: 'Indisponível' }
+  ]
 
 }
