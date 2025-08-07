@@ -11,6 +11,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { ManageProductsComponent } from './pages/admin/manage-products/manage-products.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     AdminComponent,
     DashboardComponent,
     ManageProductsComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,

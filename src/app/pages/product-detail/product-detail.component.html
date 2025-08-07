@@ -1,3 +1,20 @@
 <button (click)="addToCart()">
   Add to Cart
 </button>
+
+<hr style="margin-top: 500px; margin-bottom: 20px;">
+
+@defer (on viewport) {
+  <app-reviews></app-reviews>
+}
+@placeholder {
+  <div class="placeholder">
+    <p>Role para baixo para ver as avaliações...</p>
+  </div>
+}
+@loading (minimum 5s) {
+  <p>Carregando avaliações...</p>
+}
+@error {
+  <p>Erro ao carregar avaliações...</p>
+}
