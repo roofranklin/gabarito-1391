@@ -1,0 +1,13 @@
+<div class="shopping-cart">
+ <h2>Meu carrinho</h2>
+ <p>Itens no carrinho: {{ cartService.totalItems() }}</p>
+ <p>Preço total: {{ cartService.totalPrice() }}</p>
+ <hr>
+ @for (item of cartService.items(); track item.id) {
+    <div class="cart-item">
+        <p>{{ item.name }} - R$ {{ item.price }}</p>
+    </div>
+} @empty {
+    <p>Seu carrinho está vazio.</p>
+}
+</div>

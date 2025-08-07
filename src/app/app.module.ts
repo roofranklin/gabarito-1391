@@ -10,6 +10,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { ManageProductsComponent } from './pages/admin/manage-products/manage-products.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ManageProductsComponent } from './pages/admin/manage-products/manage-pr
     NotFoundComponent,
     AdminComponent,
     DashboardComponent,
-    ManageProductsComponent
+    ManageProductsComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
