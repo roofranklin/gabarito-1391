@@ -3,6 +3,8 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, Routes } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
+import { importProvidersFrom } from '@angular/core';
+import { AppModule } from './app/app.module';
 
 import { AppComponent } from './app/app.component';
 import { HomeComponent } from './app/pages/home/home.component';
@@ -39,6 +41,7 @@ const routes: Routes = [
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    provideHttpClient()
+    provideHttpClient(),
+    importProvidersFrom(AppModule)
   ]
 }).catch(err => console.error(err));
