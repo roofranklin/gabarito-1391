@@ -19,5 +19,11 @@ export class ProductService {
   getProductById(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
+
+  // Retorna um Observable com produtos filtrados por categoria
+  getProductsByCategory(category: string): Observable<Product[]> {
+    const encoded = encodeURIComponent(category);
+    return this.http.get<Product[]>(`${this.apiUrl}/category/${encoded}`);
+  }
 }
 
