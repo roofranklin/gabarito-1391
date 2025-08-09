@@ -1,15 +1,11 @@
 @if (categories()) {
-  <ul>
-    <li>
-      <button type="button" (click)="select(null)">Todas</button>
-    </li>
+  <div class="d-flex flex-wrap gap-2 mb-3">
+    <button type="button" class="btn btn-secondary" (click)="select(null)">Todas</button>
 
     @for (cat of categories(); track cat) {
-      <li>
-        <button type="button" (click)="select(cat)">{{ cat }}</button>
-      </li>
+      <button type="button" class="btn btn-primary" (click)="select(cat)">{{ cat }}</button>
     }
-  </ul>
+  </div>
 } @else {
   <p>Carregando categorias...</p>
 }
