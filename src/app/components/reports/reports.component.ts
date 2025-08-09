@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-reports',
-  standalone: false,
+  standalone: true,
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.scss'
 })
