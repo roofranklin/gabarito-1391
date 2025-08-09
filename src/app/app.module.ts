@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,6 @@ import { ReportsComponent } from './components/reports/reports.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
     HomeComponent,
     ProductsComponent,
     ProductDetailComponent,
@@ -27,7 +27,6 @@ import { ReportsComponent } from './components/reports/reports.component';
     AdminComponent,
     DashboardComponent,
     ManageProductsComponent,
-    ShoppingCartComponent,
     ReviewsComponent,
     AboutComponent,
     ManageUsersComponent,
@@ -39,6 +38,6 @@ import { ReportsComponent } from './components/reports/reports.component';
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }
