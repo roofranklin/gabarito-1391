@@ -37,6 +37,13 @@ export class ProductService {
     );
   }
 
+  // UPDATE
+  updateProduct(id: number, productData: Partial<Product>): Observable<Product> {
+    return this.http.patch<Product>(`${this.apiUrl}/${id}`, productData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   // DELETE
   deleteProduct(id: number): Observable<{}> {
     return this.http.delete<{}>(`${this.apiUrl}/${id}`).pipe(
