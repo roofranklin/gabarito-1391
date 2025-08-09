@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterModule } from '@angular/router';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent {
-  products = [
-    { id:1, name: 'Notebook Gamer', status: 'Disponível' },
-    { id:2, name: 'Smartphone', status: 'Pré compra' },
-    { id:3, name: 'Tablet', status: 'Indisponível' }
-  ]
-
+  private productService = inject(ProductService);
+  // Removemos o array de produtos "fake"
+  // Criamos um signal diretamente do observable do serviço!
+  public products = toSignal(this.productService.getProducts());
 }
