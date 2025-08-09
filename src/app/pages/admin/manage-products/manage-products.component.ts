@@ -1,6 +1,7 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, OnInit } from '@angular/core';
 import { AdminComponent } from '../admin.component';
 import { ProductService } from '../../../services/product.service';
+import { Product } from '../../../interfaces/product.interfaces';
 
 @Component({
   selector: 'app-manage-products',
@@ -8,16 +9,29 @@ import { ProductService } from '../../../services/product.service';
   templateUrl: './manage-products.component.html',
   styleUrl: './manage-products.component.scss'
 })
-export class ManageProductsComponent {
+export class ManageProductsComponent implements OnInit {
   adminComponent = inject(AdminComponent);
-
-  onAction() {
-    this.adminComponent.incrementActions();
-  }
-
   private productService = inject(ProductService);
+
+  public products = signal<Product[]>([]);
   public status = signal<'idle' | 'loading' | 'success' | 'error'>('idle');
   public errorMessage = signal<string | null>(null);
+
+  ngOnInit() {
+    this.loadProducts();
+  }
+
+  loadProducts() {
+    this.productService.getProducts().subscribe({
+      next: (products) => {
+        this.products.set(products);
+      },
+      error: (err) => {
+        this.status.set('error');
+        this.errorMessage.set(err.message);
+      }
+    });
+  }
 
   onAddProduct(formValue: { title: string, price: string, description: string }) {
     this.status.set('loading');
@@ -31,8 +45,8 @@ export class ManageProductsComponent {
 
     this.productService.addProduct(newProduct).subscribe({
       next: (product) => {
-        console.log('Produto adicionado:', product);
         this.status.set('success');
+        this.products.update(products => [...products, product]);
       },
       error: (err) => {
         this.status.set('error');
@@ -40,5 +54,16 @@ export class ManageProductsComponent {
       }
     });
   }
-  
+
+  onDeleteProduct(productId: number) {
+    this.productService.deleteProduct(productId).subscribe({
+      next: () => {
+        this.products.update(products => products.filter(p => p.id !== productId));
+      },
+      error: (err) => {
+        this.status.set('error');
+        this.errorMessage.set(err.message);
+      }
+    });
+  }
 }
