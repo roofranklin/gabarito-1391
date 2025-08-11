@@ -1,22 +1,9 @@
-<button (click)="addToCart()">
-  Add to Cart
-</button>
-
-<hr style="margin-top: 800px; margin-bottom: 20px;">
-
-@defer (on viewport) {
-  <app-reviews></app-reviews>
+@if (product()) {
+  <h3>{{ product()?.title }}</h3>
+  <img [src]="product()?.image" alt="{{ product()?.title }}" width="150">
+  <p>{{ product()?.description }}</p>
+  <h4>Preço: {{ product()?.price | currency:'BRL' }}</h4>
+  <button (click)="addToCart()">Adicionar ao Carrinho</button>
+} @else {
+  <p>Carregando detalhes do produto...</p>
 }
-@placeholder {
-  <div class="placeholder">
-    <p>Role para baixo para ver as avaliações...</p>
-  </div>
-}
-@loading (minimum 5s) {
-  <p>Carregando avaliações...</p>
-}
-@error {
-  <p>Erro ao carregar avaliações...</p>
-}
-
-<a [routerLink]="['/products', 1, 'reviews', 101]">Ver avaliação de exemplo</a>

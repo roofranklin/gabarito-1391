@@ -1,19 +1,14 @@
-<h2>Nossos produtos</h2>
-<ul>
-   @for (product of products; track product.id) {
-     <li>
-      <a [routerLink]="['/product', product.id]">{{ product.name }}</a>
-      @switch (product.status) {
-        @case ('Disponível') {
-          <span class="badge badge-success">Disponível</span>
-        }
-        @case ('Pré compra') {
-          <span class="badge badge-warning">Pré compra</span>
-        }
-        @default {
-          <span class="badge badge-danger">Indisponível</span>
-        }
-      }
-     </li>
-   }
-</ul>
+<h2>Nossos Produtos (da API!)</h2>
+
+@if (products()) {
+  <ul>
+    @for (product of products(); track product.id) {
+      <li>
+        <a [routerLink]="['/products', product.id]">{{ product.title }}</a>
+        <span> - {{ product.price | currency:'BRL' }}</span>
+      </li>
+    }
+  </ul>
+} @else {
+  <p>Carregando produtos...</p>
+}

@@ -1,41 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { CartService, Product } from '../../services/cart.service';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { map, switchMap } from 'rxjs';
+import { ProductService } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent {
+  private cartService = inject(CartService);
+  private route = inject(ActivatedRoute);
+  private productService = inject(ProductService);
 
-  product: Product | undefined;
+  public product = toSignal(
+    this.route.paramMap.pipe(
+      map(params => Number(params.get('id'))),
+      switchMap(id => this.productService.getProductById(id))
+    )
+  );
 
-  constructor(
-    private route: ActivatedRoute,
-    private cartService: CartService
-  ) {}
-
-  ngOnInit(): void {
-    
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(`Product ID na rota: ${id}`);
-
-    // Simulando a busca do produto por ID
-    if(!isNaN(id)) {
-      this.product = {
-        id: id,
-        name: `Product ${id}`,
-        price: 50 * id // Exemplo de preço
-      };
-    }
-    console.log(`Produto carregado: ${this.product?.name}`);
-  }
   addToCart(): void {
-    if (this.product) {
-      this.cartService.addToCart(this.product);
-      console.log(`Produto adicionado ao carrinho: ${this.product.name}`);
+    const product = this.product();
+    if (product) {
+      this.cartService.addToCart(product);
+      console.log(`Produto adicionado ao carrinho: ${product.title}`);
     }
-}
+  }
 }
