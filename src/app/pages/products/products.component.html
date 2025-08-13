@@ -1,5 +1,8 @@
 <h2>Nossos Produtos (da API!)</h2>
 
+<!-- Lista de categorias -->
+<app-category-list (categorySelected)="onCategorySelected($event)"></app-category-list>
+
 @if (products()) {
   <ul>
     @for (product of products(); track product.id) {
