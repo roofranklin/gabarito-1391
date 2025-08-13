@@ -1,17 +1,26 @@
-<h2>Nossos Produtos (da API!)</h2>
+<h2>Nossos Produtos</h2>
 
 <!-- Lista de categorias -->
 <app-category-list (categorySelected)="onCategorySelected($event)"></app-category-list>
 
 @if (products()) {
-  <ul>
+  <div class="row">
     @for (product of products(); track product.id) {
-      <li>
-        <a [routerLink]="['/products', product.id]">{{ product.title }}</a>
-        <span> - {{ product.price | currency:'BRL' }}</span>
-      </li>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <a [routerLink]="['/products', product.id]">
+            <img [src]="product.image" class="card-img-top" [alt]="product.title">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a [routerLink]="['/products', product.id]">{{ product.title }}</a>
+            </h5>
+            <p class="card-text">{{ product.price | currency:'BRL' }}</p>
+          </div>
+        </div>
+      </div>
     }
-  </ul>
+  </div>
 } @else {
   <p>Carregando produtos...</p>
 }
