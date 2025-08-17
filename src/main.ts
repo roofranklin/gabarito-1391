@@ -1,11 +1,11 @@
-/// <reference types="@angular/localize" />
-
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, Routes } from '@angular/router';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClient, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './app/interceptors/auth.interceptor';
 import { adminGuard } from './app/guards/admin.guard';
-import { importProvidersFrom } from '@angular/core';
+import { importProvidersFrom, EnvironmentProviders } from '@angular/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader, TRANSLATE_HTTP_LOADER_CONFIG } from '@ngx-translate/http-loader';
 import { AppModule } from './app/app.module';
 
 import { AppComponent } from './app/app.component';
@@ -20,6 +20,22 @@ import { ManageProductsComponent } from './app/pages/admin/manage-products/manag
 import { ManageUsersComponent } from './app/pages/admin/manage-users/manage-users.component';
 import { ReviewDetailComponent } from './app/pages/review-detail/review-detail.component';
 import { NotFoundComponent } from './app/pages/not-found/not-found.component';
+
+export function HttpLoaderFactory(): TranslateHttpLoader {
+  return new TranslateHttpLoader();
+}
+
+export function provideTranslation(): EnvironmentProviders {
+  return importProvidersFrom([
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+      },
+    }),
+  ]);
+}
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -48,6 +64,8 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
-    importProvidersFrom(AppModule)
+    importProvidersFrom(AppModule),
+    provideTranslation(),
+    { provide: TRANSLATE_HTTP_LOADER_CONFIG, useValue: { prefix: '/assets/i18n/', suffix: '.json' } }
   ]
 }).catch(err => console.error(err));

@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/">Home</a>
+          <a class="nav-link" routerLink="/">{{ 'NAV.HOME' | translate }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/products">Produtos</a>
+          <a class="nav-link" routerLink="/products">{{ 'NAV.PRODUCTS' | translate }}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/about">Sobre Nós</a>
@@ -25,6 +25,9 @@
         </li>
         <li class="nav-item" *ngIf="authService.isLoggedIn()">
           <button class="btn btn-link nav-link" (click)="logout()">Logout</button>
+        </li>
+        <li class="nav-item">
+          <app-language-switcher></app-language-switcher>
         </li>
       </ul>
     </div>
