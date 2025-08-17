@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AdminComponent } from './pages/admin/admin.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ManageProductsComponent } from './pages/admin/manage-products/manage-products.component';
@@ -16,11 +21,16 @@ import { ReviewDetailComponent } from './pages/review-detail/review-detail.compo
     ManageProductsComponent,
     AboutComponent,
     ManageUsersComponent,
-    ReviewDetailComponent
+    ReviewDetailComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    ShoppingCartComponent
   ],
   providers: [],
   bootstrap: []
