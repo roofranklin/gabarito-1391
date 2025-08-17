@@ -2,8 +2,8 @@
   <h3>{{ product()?.title }}</h3>
   <img [src]="product()?.image" alt="{{ product()?.title }}" width="150">
   <p>{{ product()?.description }}</p>
-  <h4>Preço: {{ product()?.price | currency:'BRL' }}</h4>
-  <button (click)="addToCart()">Adicionar ao Carrinho</button>
+  <h4>{{ 'PRODUCT.PRICE' | translate }}: {{ product()?.price | currency:'BRL' }}</h4>
+  <button (click)="addToCart()">{{ 'PRODUCT.ADD_TO_CART' | translate }}</button>
 } @else {
   <p>Carregando detalhes do produto...</p>
 }

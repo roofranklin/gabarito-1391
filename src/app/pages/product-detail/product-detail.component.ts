@@ -3,13 +3,14 @@ import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { map, switchMap } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })

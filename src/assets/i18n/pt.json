@@ -1,8 +1,17 @@
 {
+  "WELCOME_MESSAGE": "Bem-vindo, {{username}}!",
   "NAV": {
     "HOME": "Início",
+    "ABOUT": "Sobre Nós",
     "PRODUCTS": "Produtos",
     "ADMIN": "Admin",
-    "LOGIN": "Entrar"
+    "LOGIN": "Entrar",
+    "LOGOUT": "Sair"
+  },
+  "PRODUCT": {
+    "TITLE": "Lista de Produtos",
+    "DETAILS": "Detalhes do Produto",
+    "PRICE": "Preço",
+    "ADD_TO_CART": "Adicionar ao Carrinho"
   }
 }
