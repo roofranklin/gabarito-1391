@@ -4,7 +4,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, Routes } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './app/interceptors/auth.interceptor';
-import { authGuard } from './app/guards/auth.guard';
+import { adminGuard } from './app/guards/admin.guard';
 import { importProvidersFrom } from '@angular/core';
 import { AppModule } from './app/app.module';
 
@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [authGuard],
+    canActivate: [adminGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'manage-products', component: ManageProductsComponent },
