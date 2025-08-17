@@ -1,0 +1,24 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3>Login</h3>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="login()">
+            <div class="form-group mb-3">
+              <label for="email">Endereço de Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Digite seu email" [(ngModel)]="credentials.username" name="username" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="password">Senha</label>
+              <input type="password" class="form-control" id="password" placeholder="Senha" [(ngModel)]="credentials.password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,11 +2,14 @@
 
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, Routes } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './app/interceptors/auth.interceptor';
+import { authGuard } from './app/guards/auth.guard';
 import { importProvidersFrom } from '@angular/core';
 import { AppModule } from './app/app.module';
 
 import { AppComponent } from './app/app.component';
+import { LoginComponent } from './app/pages/login/login.component';
 import { HomeComponent } from './app/pages/home/home.component';
 import { ProductsComponent } from './app/pages/products/products.component';
 import { ProductDetailComponent } from './app/pages/product-detail/product-detail.component';
@@ -19,6 +22,7 @@ import { ReviewDetailComponent } from './app/pages/review-detail/review-detail.c
 import { NotFoundComponent } from './app/pages/not-found/not-found.component';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'product/:id', component: ProductDetailComponent },
@@ -28,6 +32,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [authGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'manage-products', component: ManageProductsComponent },
@@ -42,7 +47,7 @@ const routes: Routes = [
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     importProvidersFrom(AppModule)
   ]
 }).catch(err => console.error(err));

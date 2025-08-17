@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
@@ -13,6 +14,7 @@ import { ManageProductsComponent } from './pages/admin/manage-products/manage-pr
 import { AboutComponent } from './pages/about/about.component';
 import { ManageUsersComponent } from './pages/admin/manage-users/manage-users.component';
 import { ReviewDetailComponent } from './pages/review-detail/review-detail.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { ReviewDetailComponent } from './pages/review-detail/review-detail.compo
     AboutComponent,
     ManageUsersComponent,
     ReviewDetailComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { ReviewDetailComponent } from './pages/review-detail/review-detail.compo
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: []
