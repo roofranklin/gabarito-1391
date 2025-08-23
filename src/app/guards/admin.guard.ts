@@ -5,7 +5,6 @@ import { jwtDecode } from 'jwt-decode';
 
 interface JwtPayload {
   user: string;
-  // Adicione outras propriedades do payload do token, se houver
 }
 
 export const adminGuard: CanActivateFn = (route, state) => {
