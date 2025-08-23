@@ -7,6 +7,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 import { routes } from './app.routes'; 
 import { authInterceptor } from './interceptors/auth.interceptor';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export function provideTranslation(): EnvironmentProviders {
   return importProvidersFrom([
@@ -39,6 +40,6 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideTranslation(),
-    { provide: TRANSLATE_HTTP_LOADER_CONFIG, useValue: { prefix: '/assets/i18n/', suffix: '.json' } }
+    { provide: TRANSLATE_HTTP_LOADER_CONFIG, useValue: { prefix: '/assets/i18n/', suffix: '.json' } }, provideClientHydration(withEventReplay())
   ]
 };
