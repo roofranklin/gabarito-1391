@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrl: './language-switcher.component.scss'
 })
 export class LanguageSwitcherComponent {
+
   private translate = inject(TranslateService);
 
   changeLanguage(lang: string) {

@@ -6,11 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CategoryService {
+
   private apiUrl = 'https://fakestoreapi.com/products';
 
-  constructor(private http: HttpClient) { }
+  constructor( private http: HttpClient ) { }
 
   getCategories(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/categories`);
   }
+  
 }

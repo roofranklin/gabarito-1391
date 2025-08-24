@@ -1,24 +1,26 @@
-// src/app/services/auth.service.ts
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   private http = inject(HttpClient);
   private apiUrl = 'https://fakestoreapi.com/auth/login';
 
+
   login(credentials: { username: string, password: string }) {
     return this.http.post<{ token: string }>(this.apiUrl, credentials).pipe(
       tap(response => {
-        // Armazena o token ao receber
-        localStorage.setItem('authToken', response.token);
+        // Armazenar o token no localStorage
+        localStorage.setItem('token', response.token);
       })
     );
   }
 
   getToken(): string | null {
-    return localStorage.getItem('authToken');
+    return localStorage.getItem('token');
   }
 
   getUsername(): string | null {
@@ -33,10 +35,10 @@ export class AuthService {
   } 
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    return this.getToken() !== null;
   }
-
-  logout(): void {
-    localStorage.removeItem('authToken');
+  logout() {
+    localStorage.removeItem('token');
   }
+  
 }

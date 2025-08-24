@@ -1,36 +1,32 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { Product } from '../interfaces/product.interfaces';
+import { Product } from '../interfaces/product.interface';
 import { catchError, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private http = inject(HttpClient);
-  private apiUrl = 'https://fakestoreapi.com/products';
+
+  private http = inject(HttpClient)
+  private apiUrl = 'https://fakestoreapi.com/products'
 
   // Retorna um Observable com a lista de todos os produtos
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+    return this.http.get<Product[]>(this.apiUrl)
   }
 
-  // Retorna um Observable com um único produto pelo ID
+  // Retorna um Observable com o produto com o ID especificado
   getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${id}`);
+    return this.http.get<Product>(`${this.apiUrl}/${id}`)
   }
 
-  // Retorna um Observable com produtos filtrados por categoria
   getProductsByCategory(category: string): Observable<Product[]> {
-    // A API de categoria não retorna a URL da imagem.
-    // Por isso, pegamos todos os produtos e filtramos no lado do cliente.
-    return this.getProducts().pipe(
-      map(products => products.filter(p => p.category === category))
-    );
+    const encoded = encodeURIComponent(category);
+    return this.http.get<Product[]>(`${this.apiUrl}/category/${encoded}`);
   }
-
-  // CREATE
+// CREATE
   addProduct(newProduct: { title: string, price: number, description: string }): Observable<Product> {
     return this.http.post<Product>(this.apiUrl, newProduct).pipe(
       catchError(this.handleError)
@@ -57,4 +53,3 @@ export class ProductService {
     return throwError(() => new Error('Algo deu errado; por favor, tente novamente mais tarde.'));
   }
 }
-
