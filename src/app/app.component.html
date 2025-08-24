@@ -23,12 +23,12 @@
         <ul class="navbar-nav ms-auto">
           @if (!authService.isLoggedIn()) {
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login">{{ 'NAV.LOGIN' | translate }}</a>
+            <a class="nav-link" routerLink="/login">{{ 'NAVIGATION.LOGIN' | translate }}</a>
           </li>
         } @else {
           <li class="nav-item" *ngIf="authService.isLoggedIn()">
             <p>{{ 'WELCOME_MESSAGE' | translate: { username: authService.getUsername() } }}</p>
-            <button class="btn btn-link nav-link" (click)="logout()">{{ 'NAV.LOGOUT' | translate }}</button>
+            <button class="btn btn-link nav-link" (click)="logout()">{{ 'NAVIGATION.LOGOUT' | translate }}</button>
           </li>
         }
         </ul>
