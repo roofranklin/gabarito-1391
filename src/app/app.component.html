@@ -21,15 +21,16 @@
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          @if(!authService.isLoggedIn()) {
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/login">{{ 'NAVIGATION.LOGIN' | translate }}</a>
-            </li>
-          } @else {
-            <li class="nav-item">
-              <button class="btn btn-outline-danger" (click)="logout()">Logout</button>
-            </li>
-          }
+          @if (!authService.isLoggedIn()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">{{ 'NAVIGATION.LOGIN' | translate }}</a>
+          </li>
+        } @else {
+          <li class="nav-item" *ngIf="authService.isLoggedIn()">
+            <p>{{ 'WELCOME_MESSAGE' | translate: { username: authService.getUsername() } }}</p>
+            <button class="btn btn-link nav-link" (click)="logout()">{{ 'NAVIGATION.LOGOUT' | translate }}</button>
+          </li>
+        }
         </ul>
         <app-language-switcher></app-language-switcher>
       </div>

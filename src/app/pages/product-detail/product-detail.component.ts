@@ -1,16 +1,17 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { map, switchMap } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ProductService } from '../../services/product.service';
-import { ReviewsComponent } from '../../components/reviews/reviews.component';
 import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [ReviewsComponent, RouterModule],
+  imports: [ RouterModule, TranslateModule, CommonModule],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
