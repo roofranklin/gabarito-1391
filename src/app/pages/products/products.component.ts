@@ -9,29 +9,29 @@ import { CategoryListComponent } from '../../components/category-list/category-l
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, RouterModule, CategoryListComponent],
+  imports: [RouterModule, CommonModule, CategoryListComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
+
 export class ProductsComponent {
   private productService = inject(ProductService);
 
-  // Categoria selecionada (null = todas)
+  // Categoria selecionada (null = todas as categorias)
   public selectedCategory = signal<string | null>(null);
 
-  // Observable que troca a fonte conforme a categoria selecionada
   private products$ = toObservable(this.selectedCategory).pipe(
-    switchMap(category =>
-      category
-        ? this.productService.getProductsByCategory(category)
-        : this.productService.getProducts()
-    )
-  );
+  switchMap(category => {
+    return category
+      ? this.productService.getProductsByCategory(category)
+      : this.productService.getProducts();
+  })
+);
 
-  // Signal dos produtos (carrega conforme seleção)
+  // Criamos um signal diretamente a partir do Observable
   public products = toSignal(this.products$);
 
-  onCategorySelected(category: string | null) {
+  onCategorySelected(category: string | null): void {
     this.selectedCategory.set(category);
   }
 }
