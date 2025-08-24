@@ -1,4 +1,5 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 
@@ -6,6 +7,7 @@ import { tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  private platformId = inject(PLATFORM_ID);
   private http = inject(HttpClient);
   private apiUrl = 'https://fakestoreapi.com/auth/login';
 
@@ -13,14 +15,18 @@ export class AuthService {
   login(credentials: { username: string, password: string }) {
     return this.http.post<{ token: string }>(this.apiUrl, credentials).pipe(
       tap(response => {
-        // Armazenar o token no localStorage
-        localStorage.setItem('token', response.token);
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.setItem('authToken', response.token);
+        }
       })
     );
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem('authToken');
+    }
+    return null;
   }
 
   getUsername(): string | null {
@@ -37,8 +43,11 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
-  logout() {
-    localStorage.removeItem('token');
+
+  logout(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('authToken');
+    }
   }
   
 }
