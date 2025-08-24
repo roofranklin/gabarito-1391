@@ -1,9 +1,11 @@
 @if (product()) {
   <h3>{{ product()?.title }}</h3>
-  <img [src]="product()?.image" alt="{{ product()?.title }}" width="150">
-  <p>{{ product()?.description }}</p>
-  <h4>{{ 'PRODUCT.PRICE' | translate }}: {{ product()?.price | currency:'BRL' }}</h4>
-  <button (click)="addToCart()">{{ 'PRODUCT.ADD_TO_CART' | translate }}</button>
+  <p>{{ 'PRODUCT.PRICE' | translate }}: {{ product()?.price | currency:'BRL' }}: {{ product()?.price }}</p>
+  <p>{{ 'PRODUCT.DETAILS' | translate }}: {{ product()?.description }}</p>
+  <p>{{ 'PRODUCT.CATEGORY' | translate }}: {{ product()?.category }}</p>
+  <img [src]="product()?.image" alt="{{ product()?.title }}" style="max-width: 200px;">
+
+  <button class="btn btn-primary" (click)="addToCart()">{{ 'PRODUCT.ADD_TO_CART' | translate }}</button>
 } @else {
   <p>Carregando detalhes do produto...</p>
 }

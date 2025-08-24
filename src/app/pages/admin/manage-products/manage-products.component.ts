@@ -1,9 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, signal, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
-import { Product } from '../../../interfaces/product.interfaces';
-import { CommonModule } from '@angular/common';
+import { Product } from '../../../interfaces/product.interface';
 
 @Component({
   selector: 'app-manage-products',

@@ -3,11 +3,14 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   private platformId = inject(PLATFORM_ID);
   private http = inject(HttpClient);
   private apiUrl = 'https://fakestoreapi.com/auth/login';
+
 
   login(credentials: { username: string, password: string }) {
     return this.http.post<{ token: string }>(this.apiUrl, credentials).pipe(
@@ -38,7 +41,7 @@ export class AuthService {
   } 
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    return this.getToken() !== null;
   }
 
   logout(): void {
@@ -46,4 +49,5 @@ export class AuthService {
       localStorage.removeItem('authToken');
     }
   }
+  
 }

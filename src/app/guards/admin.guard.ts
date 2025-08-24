@@ -15,7 +15,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
     const token = authService.getToken();
     if (token) {
       try {
-        const decodedToken = jwtDecode<JwtPayload>(token);
+        const decodedToken: JwtPayload = jwtDecode(token);
         if (decodedToken.user === 'johnd') {
           return true;
         }
@@ -24,7 +24,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
       }
     }
   }
-
   router.navigate(['/login']);
   return false;
+
 };

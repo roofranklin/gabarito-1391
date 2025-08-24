@@ -40,6 +40,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideTranslation(),
-    { provide: TRANSLATE_HTTP_LOADER_CONFIG, useValue: { prefix: '/assets/i18n/', suffix: '.json' } }, provideClientHydration(withEventReplay())
+    { provide: TRANSLATE_HTTP_LOADER_CONFIG, useValue: { prefix: '/assets/i18n/', suffix: '.json' } }, 
+    provideClientHydration(withEventReplay())
   ]
 };

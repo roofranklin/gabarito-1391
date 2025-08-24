@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+
   credentials = {
     username: '',
     password: ''
@@ -21,12 +22,14 @@ export class LoginComponent {
   private router = inject(Router);
 
   login() {
-    this.authService.login(this.credentials).subscribe({
+    this.authService.login(this.credentials).subscribe(() => {
       next: () => {
+        // Redirecionar para a página de admin
         this.router.navigate(['/admin']);
-      },
-      error: (err) => {
+      }
+      error: (err: any) => {
         console.error('Login failed', err);
+        // Aqui você pode adicionar lógica para exibir uma mensagem de erro ao usuário
       }
     });
   }
